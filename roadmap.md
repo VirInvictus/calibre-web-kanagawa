@@ -70,19 +70,28 @@ when shipping; details and rationale live in `spec.md`.
 
 ## Phase 3: Read-only reading_status + read-only hardening
 
-- [ ] `admin.py`: accept enumeration columns for `config_read_column`
+- [x] `admin.py`: accept enumeration columns for `config_read_column`
       (dropdown filter + `check_valid_read_column`)
-- [ ] `db.py generate_linked_query`: enum branch via the normalized link
+- [x] `db.py generate_linked_query`: enum branch via the normalized link
       table (idiom: restricted-column filter at db.py:786-809)
-- [ ] `web.py:1644`: enum projection (`== 'Read'`) + raw label for the badge
-- [ ] `web.py:747-749` and `search.py:145-147`: Read/Unread filters for enum
-- [ ] `helper.py edit_book_read_status`: write-guard; toggle endpoint refuses
-      on enum columns
-- [ ] `detail.html`: 4-state badge (Read/Reading/To Read/DNF, spec §5.2
-      colors) replaces the checkbox
-- [ ] Harden: attach `metadata.db` read-only (`file:...?mode=ro`) in `db.py`
-- [ ] Link cc2 in config; verify badge + section counts against cquarry;
-      checksum metadata.db before/after a browse session
+- [x] `db.py get_book_read_archived`: the same enum branch; a second
+      bool-only query builder the research map missed, found because the
+      detail badge showed To Read for a Read book (AttributeError swallowed
+      by the except, yielding None)
+- [x] `web.py:1644`: enum projection (`== 'Read'`) + raw label for the badge
+- [x] `web.py:747-749` and `search.py:145-147`: Read/Unread filters for enum
+- [x] `helper.py edit_book_read_status`: write-guard; toggle endpoint refuses
+      on enum columns (verified: HTTP 400 with the refusal message)
+- [x] `detail.html`: 4-state badge replaces the checkbox; grid read-tick
+      condition widened to accept the enum value in index/shelf/author/search
+- [x] Harden: `metadata.db` attached read-only (`file:...?mode=ro` + uri
+      connect arg) at both attach sites
+- [x] Link cc2 in config; verified on a scratch instance with default creds:
+      badges exact on Read/Reading/To Read sample books, read section
+      paginates to exactly 149 books (matches SQL), metadata.db checksum
+      identical before/after, `validate_library.py` 0 errors
+- [ ] Brandon: DNF badge eyeball whenever a DNF book exists (none currently
+      carry the value)
 
 ## Phase 4: Wings
 

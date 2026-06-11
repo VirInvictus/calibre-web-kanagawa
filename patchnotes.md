@@ -1,5 +1,27 @@
 # Patchnotes
 
+## 0.4.0 (2026-06-11)
+
+Phase 3: the library's reading_status, read-only, plus the hard read-only
+guarantee.
+
+- The fork now accepts enumeration custom columns as the linked read column
+  and the instance links cc2 (`reading_status`). Enum branches added to both
+  query builders (`generate_linked_query` AND `get_book_read_archived`; the
+  second one was missed by the research map and found when the badge showed
+  To Read on a Read book), joining through the normalized link table.
+- Detail page shows a read-only 4-state badge (Read / Reading / To Read /
+  DNF in Dragon colors) instead of the toggle checkbox; grid read-ticks
+  accept the enum value; Read/Unread sections and advanced search project
+  Read == 'Read'.
+- Write-guard: the toggle endpoint refuses with "Read status is managed in
+  Calibre and is read-only here" (HTTP 400).
+- metadata.db is now attached `mode=ro` at both attach sites; the web app
+  cannot write the library by construction.
+- Verified on a scratch instance: badges exact for all three live statuses,
+  read section paginates to exactly 149 books (matches SQL), checksum
+  identical across a full browse session, validator at 0 errors.
+
 ## 0.3.0 (2026-06-11)
 
 Phase 2: the feature surface trimmed to browse / search / read / download.

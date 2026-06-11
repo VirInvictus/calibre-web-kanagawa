@@ -187,6 +187,7 @@ must never be machine-written.
 | --- | --- |
 | `cps/admin.py:282, 959` (incl. `check_valid_read_column`) | Accept `datatype.in_(['bool', 'enumeration'])`. |
 | `cps/db.py:811` `generate_linked_query` | Enum branch: bool columns join the value table directly (`read_column.book == Books.id`); enumeration is normalized, so join `books_custom_column_N_link` then the value table, selecting the string value. Idiom precedent: restricted-column filter at `db.py:786-809`. |
+| `cps/db.py:729` `get_book_read_archived` | Same enum branch; this is a SEPARATE query builder used by the detail view (and basic theme) with its own bool-only join. Found during verification: for enum classes the `.book` access raises AttributeError, silently swallowed by the surrounding except, yielding None. |
 | `cps/web.py:1644` | Detail view: `entry.read_status = (value == 'Read')` for enum; also expose the raw label for the badge. |
 | `cps/web.py:747-749` | Read/Unread sections: enum filter per 5.2. |
 | `cps/search.py:145-147` | Advanced-search read filter: same projection. |
