@@ -95,14 +95,21 @@ when shipping; details and rationale live in `spec.md`.
 
 ## Phase 4: Wings
 
-- [ ] cquarry installed editable into the venv; importability of the search
-      engine confirmed (else: agree an API addition with CalibreQuarry first)
-- [ ] `cps/wings.py`: read `preferences.virtual_libraries`, evaluate via
-      cquarry, mtime-keyed cache
-- [ ] Sidebar "Wings" section with counts; `/wings/<name>` route renders the
-      standard grid filtered by id set
-- [ ] Unsorted wing handled (vl: references resolve; empty wing displays sanely)
-- [ ] Verify: web counts match `cquarry --wings` for all 32 entries
+- [x] cquarry installed editable into the venv; its `CalibreDB` is the whole
+      integration surface (`get_virtual_libraries()` + `resolve_vl(name)`,
+      mode=ro by its own contract)
+- [x] `cps/wings.py`: blueprint with mtime-keyed cache, app context
+      processor injecting `wings_list` (name + count) into every render
+- [x] Sidebar "Wings" section in the old shelves slot; `/wings/<name>`
+      (+ `/page/<n>`) renders the standard index grid filtered by id set,
+      title-sorted; unknown wings 404
+- [x] `index.html` sort header gated off for wings (it builds
+      `web.books_list` URLs that cannot exist for a wing; this was a 500)
+- [x] Unsorted wing handled (vl: references resolve; empty wing renders)
+- [x] Verify (scratch instance): all 32 sidebar counts match
+      `cquarry --wings` exactly; Languages Wing page holds exactly its 41
+      books; The Tabletop paginates 720/60 to a full page 12; metadata.db
+      checksum unchanged
 
 ## Phase 5: EPUB reader theme (stretch)
 

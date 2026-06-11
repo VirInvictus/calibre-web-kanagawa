@@ -1,5 +1,27 @@
 # Patchnotes
 
+## 0.5.0 (2026-06-11)
+
+Phase 4: Wings. The library's 31 virtual libraries (plus Unsorted) are now
+first-class browse sections in the web UI.
+
+- New `cps/wings.py`: reads `virtual_libraries` from metadata.db's
+  preferences table and evaluates each wing's Calibre search expression
+  with CalibreQuarry's engine (`CalibreDB.resolve_vl`, which handles `vl:`
+  cross-references, so Unsorted parses). Results cached keyed on
+  metadata.db mtime; any library change invalidates on the next request.
+- Sidebar "Wings" section (in the slot shelves vacated) with live counts;
+  `/wings/<name>` renders the standard cover grid, title-sorted, with
+  working pagination; unknown wings 404. The index sort header is gated
+  off for wings (it builds section URLs that cannot exist for a wing and
+  500d; found in verification).
+- cquarry (v2.6+, editable from ~/.gitrepos/CalibreQuarry) becomes the
+  fork's one extra dependency. First cross-project consumption of its
+  search engine.
+- Verified on a scratch instance: all 32 sidebar counts match
+  `cquarry --wings` exactly; spot-checked wings hold exactly their books;
+  empty wing renders; library checksum unchanged.
+
 ## 0.4.0 (2026-06-11)
 
 Phase 3: the library's reading_status, read-only, plus the hard read-only
