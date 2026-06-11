@@ -42,18 +42,31 @@ when shipping; details and rationale live in `spec.md`.
 
 ## Phase 2: Trim the feature surface
 
-- [ ] Apply and document the config baseline (spec §6.1) in the admin UI
-- [ ] Patch: tasks page + navbar link removed, routes disabled
-- [ ] Patch: shelves UI removed (sidebar section, create/edit), routes disabled
-- [ ] Patch: send-to-eReader button, SMTP/email config UI removed
-- [ ] Patch: Kindle/Kobo per-user fields removed from user_edit
-- [ ] Patch: upload + web metadata-editing entry points removed, editbooks
-      routes disabled
-- [ ] Patch: mass mark-read buttons removed from book_table
-- [ ] Patch: registration / magic-link / Goodreads remnants removed
-- [ ] Two accounts confirmed (Brandon, Rin), both unrestricted
-- [ ] Verify: stripped elements gone, disabled routes 404, core browse /
-      read / download flows intact
+- [x] Config baseline applied (spec §6.1): everything was already off except
+      `config_embed_metadata`, now 0
+- [x] Patch: tasks navbar item removed; tasks blueprint answers 404
+- [x] Patch: shelves UI removed (sidebar section, create-shelf, detail-page
+      add/remove toolbar); shelf blueprint answers 404. Sidebar slot reserved
+      for Wings (Phase 4)
+- [x] Patch: send-to-eReader buttons removed from detail page; per-user
+      eReader email field removed from user_edit (SMTP admin pane left in
+      place: admin-only, inert without recipients; revisit if it grates)
+- [x] Kobo per-user fields stay config-gated (invisible with sync off);
+      no patch needed
+- [x] Patch: Edit Metadata button removed from detail page; editbook
+      blueprint (edit/upload/convert ajax) answers 404; uploads also off in
+      config
+- [x] Patch: mass mark-read buttons removed from book_table
+- [x] Registration / magic-link / Goodreads: config-off, and the remotelogin
+      blueprint answers 404 (admin config panes left as-is: admin-only)
+- [x] Route trimming implemented as `cps/smallscope.py` `trim()`:
+      before_request 404 guards installed pre-registration, so `url_for`
+      keeps resolving everywhere (rebase-friendly)
+- [ ] Rin's account created (Brandon: admin UI, needs a password chosen)
+- [x] Verify: /tasks, /shelf/*, /admin/book/* return 404; /login renders
+      200 themed; auth redirects intact; Jinja syntax pass on all four
+      edited templates
+- [ ] Brandon's browse pass over the trimmed UI
 
 ## Phase 3: Read-only reading_status + read-only hardening
 

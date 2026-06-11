@@ -1,5 +1,22 @@
 # Patchnotes
 
+## 0.3.0 (2026-06-11)
+
+Phase 2: the feature surface trimmed to browse / search / read / download.
+
+- New `cps/smallscope.py` in the fork: `trim()` installs before_request 404
+  guards on unused blueprints ahead of registration, so `url_for` keeps
+  resolving and the diff stays rebase-friendly. Disabled: tasks, shelf,
+  editbook, remotelogin.
+- Template removals: Tasks navbar item; the entire shelves sidebar section
+  and detail-page shelf toolbar (the slot is reserved for Wings);
+  send-to-eReader buttons and the per-user eReader email field; the Edit
+  Metadata button; mass mark-read radios in the list view.
+- Config baseline (spec §6.1) applied; only `config_embed_metadata` needed
+  flipping, the rest were already off. Kobo per-user UI stays config-gated.
+- Verified: trimmed routes 404, login renders themed, auth redirects
+  intact, Jinja syntax pass on all edited templates.
+
 ## 0.2.0 (2026-06-11)
 
 Phase 1: the Kanagawa Dragon theme, live on the instance.
