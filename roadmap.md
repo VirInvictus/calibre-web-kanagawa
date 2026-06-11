@@ -22,22 +22,23 @@ when shipping; details and rationale live in `spec.md`.
 
 ## Phase 1: Kanagawa Dragon theme
 
-- [ ] Extract caliBlur color inventory (hex frequency pass over
-      `caliBlur.css`, `style.css`, `main.css`) and finalize the role mapping
-      table in spec.md §4.3
-- [ ] `theme/kanagawa-dragon.css`: `:root` palette + caliBlur variable
-      overrides
-- [ ] Surface pass: navbar, sidebar, book grid (cover-forward treatment:
-      spacing, radius, shadow, hover lift), pagination, footer
-- [ ] Detail page pass: cover presentation, metadata block, custom-column
-      rows, buttons
-- [ ] Forms/admin/login/search pass (low-traffic pages still themed)
-- [ ] `layout.html`: add the single stylesheet link after
-      `caliBlur_override.css`
-- [ ] `just sync-theme` vendoring works; vendored copy committed in the fork
-- [ ] logo.svg finalized; regenerate `favicon.ico` / `icon.svg` / `icon.png`
-- [ ] Verify across pages listed in spec §10.1 plus mobile widths
-      (caliBlur's `--color-background-mobile` path)
+- [x] caliBlur color inventory + role mapping (spec §4.3); implemented as a
+      regenerable mechanical pass: `scripts/recolor_caliblur.py` parses
+      caliBlur.css + caliBlur_override.css and rewrites the marked block in
+      the theme sheet (~176 rules; media-query context and !important
+      preserved, @keyframes replaced whole). 16 unit tests
+- [x] `theme/kanagawa-dragon.css`: `:root` palette + caliBlur variable
+      overrides + generated recolor block + hand polish layer
+- [x] Cover-forward polish: warm headings (oldWhite), cover radius/shadow/
+      hover lift, quiet authors/series, subdued read badge, dragonYellow
+      stars, warm links/buttons/focus ring, status-badge classes for Phase 3
+- [x] `layout.html`: stylesheet link added after `caliBlur_override.css`
+- [x] `just sync-theme` vendoring works; vendored copy in the fork
+- [x] logo.svg first draft; `favicon.ico` / `icon.svg` / `icon.png`
+      regenerated from it; `config_theme` flipped to caliBlur base
+- [ ] Brandon's visual pass (desktop + mobile widths), logo verdict, and
+      per-page touch-ups that fall out of it (the generated recolor is
+      mechanical; expect a polish iteration)
 
 ## Phase 2: Trim the feature surface
 
