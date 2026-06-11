@@ -1,0 +1,52 @@
+/*
+ * kanagawa-dragon.css — Kanagawa Dragon theme for calibre-web
+ *
+ * Loads AFTER caliBlur.css and caliBlur_override.css (the stock dark theme
+ * stays enabled as the base layer; this sheet overrides it).
+ * Canonical copy: calibre-web-kanagawa/theme/. The copy in the fork's
+ * cps/static/css/ is vendored via `just sync-theme`; do not edit it there.
+ *
+ * Palette: Dragon variant per kanagawa-dragon-nvim-emacs (follows
+ * rebelot/kanagawa.nvim). Contract: spec.md §4.
+ */
+
+:root {
+    /* Dragon palette */
+    --kngw-black0: #0d0c0c;
+    --kngw-black1: #12120f;
+    --kngw-black2: #1d1c19;
+    --kngw-black3: #181616;
+    --kngw-black4: #282727;
+    --kngw-black5: #393836;
+    --kngw-black6: #625e5a;
+    --kngw-white: #c5c9c5;
+    --kngw-old-white: #c8c093;
+    --kngw-fuji-white: #dcd7ba;
+    --kngw-gray: #a6a69c;
+    --kngw-gray2: #9e9b93;
+    --kngw-gray3: #7a8382;
+    --kngw-green: #87a987;
+    --kngw-green2: #8a9a7b;
+    --kngw-pink: #a292a3;
+    --kngw-orange: #b6927b;
+    --kngw-orange2: #b98d7b;
+    --kngw-blue: #658594;
+    --kngw-blue2: #8ba4b0;
+    --kngw-violet: #8992a7;
+    --kngw-red: #c4746e;
+    --kngw-aqua: #8ea4a2;
+    --kngw-ash: #737c73;
+    --kngw-teal: #949fb5;
+    --kngw-yellow: #c4b28a;
+    --kngw-samurai-red: #e82424;
+    --kngw-ronin-yellow: #ff9e3b;
+
+    /* caliBlur variable overrides (spec §4.3) */
+    --color-background: var(--kngw-black1);
+    --color-primary: var(--kngw-orange);
+    --color-secondary: var(--kngw-yellow);
+    --color-secondary-hover: var(--kngw-orange2);
+    --color-background-mobile: var(--kngw-black0);
+}
+
+/* Phase 1 fills in the surface passes from here (roadmap.md). */
